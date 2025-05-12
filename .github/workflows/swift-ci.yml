@@ -32,10 +32,9 @@ jobs:
               run: |
                     v=$(cat .swift-version)
                     echo "swift_version=$v" >> $GITHUB_OUTPUT
-            - uses: slashmo/install-swift@v0.4.0 # swift-actions/setup-swift@v2
+            - uses: swift-actions/setup-swift@v2
               with:
-                # swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
-                version: ${{ steps.get_swift_version.outputs.swift_version }}
+                swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
             - name: Verify swift version
               run: |
                     swift --version
