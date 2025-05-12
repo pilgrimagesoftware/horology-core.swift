@@ -23,6 +23,6 @@ final class CalendarExtensionTests: XCTestCase {
 
     func testLabel() throws {
         let calendar = Calendar.from(identifier: "gregorian")
-        XCTAssertEqual(calendar.label, "Gregorian")
+        XCTAssertEqual(calendar.label, "calendar.identifier.gregorian")
     }
 }
