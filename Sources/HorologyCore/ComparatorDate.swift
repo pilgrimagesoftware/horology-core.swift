@@ -1,8 +1,6 @@
 //
 //  ComparatorDate.swift
-//  Horology
-//
-//  Created by Paul Schifferer on 24/8/17.
+//  Horology Core
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 

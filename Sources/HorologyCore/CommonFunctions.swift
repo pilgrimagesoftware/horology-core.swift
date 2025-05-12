@@ -1,8 +1,6 @@
 //
 //  CommonFunctions.swift
-//  Horology
-//
-//  Created by Paul Schifferer on 21/10/17.
+//  Horology Core
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 

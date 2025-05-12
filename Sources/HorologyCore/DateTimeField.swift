@@ -1,8 +1,6 @@
 //
 //  DateTimeField.swift
-//  Horology
-//
-//  Created by Paul Schifferer on 8/9/17.
+//  Horology Core
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 

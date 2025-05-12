@@ -1,8 +1,6 @@
 //
 //  ValueConverter.swift
-//  Horology
-//
-//  Created by Paul Schifferer on 26/8/17.
+//  Horology Core
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 

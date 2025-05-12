@@ -1,8 +1,6 @@
 //
-//  CalendarExtensions.swift
-//  Horology
-//
-//  Created by Paul Schifferer on 29/8/17.
+//  CalendarExtensionTests.swift
+//  Horology Core Tests
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
