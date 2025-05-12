@@ -1,0 +1,116 @@
+name: CI
+
+concurrency: ci
+
+on:
+    push:
+        branches: [develop]
+        paths:
+            - Sources/**
+            - Tests/**
+            - Package.swift
+            - .swift-version
+    workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+    tests:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - name: Linux
+                      os: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
+            - name: Get swift version
+              id: get_swift_version
+              run: |
+                    v=$(cat .swift-version)
+                    echo "swift_version=$v" >> $GITHUB_OUTPUT
+            - uses: slashmo/install-swift@v0.4.0 # swift-actions/setup-swift@v2
+              with:
+                # swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
+                version: ${{ steps.get_swift_version.outputs.swift_version }}
+            - name: Verify swift version
+              run: |
+                    swift --version
+            - name: Build
+              run: |
+                    swift build -v
+            - name: Run tests
+              run: |
+                    swift test -v
+
+
+    #    docs:
+    #        needs: [tests]
+    #        runs-on: ubuntu-latest
+    #        concurrency: docs
+    #        steps:
+    #            - uses: actions/checkout@v4
+    #            - uses: actions/setup-python@v5
+    #              with:
+    #                  python-version: "3.11"
+    #            - name: install-deps
+    #              run: pip install -r requirements/docs.txt
+    #            - name: make-docs
+    #              run: cd docs && make html
+    #            - name: publish-docs
+    #              uses: peaceiris/actions-gh-pages@v4
+    #              with:
+    #                  github_token: ${{ secrets.GITHUB_TOKEN }}
+    #                  publish_dir: ./docs/_build/html
+
+    tag:
+        needs: [tests]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Bump version and push tag
+              uses: anothrNick/github-tag-action@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  WITH_V: true
+                  DEFAULT_BUMP: patch
+
+    publish:
+        needs: [tag]
+        runs-on: ubuntu-latest
+        concurrency: publish
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+            - name: Get latest tag
+              id: get_latest_tag
+              uses: actions-ecosystem/action-get-latest-tag@v1
+            # - name: Publish
+            #   env:
+            #     GOPROXY: proxy.golang.org
+            #   run: go list -m github.com/pilgrimagesoftware/common@${{ steps.get_latest_tag.outputs.tag }}
+
+    notify:
+        needs: [tag]
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - repo: horology-api
+                    - repo: horology-web
+        steps:
+            - uses: juztcode/repo-ditpatch-action@v1
+              continue-on-error: true
+              with:
+                event-type: db-published
+                token: ${{ secrets.REPO_ACCESS_TOKEN }}
+                repository: pilgrimagesoftware/${{ matrix.repo }}
