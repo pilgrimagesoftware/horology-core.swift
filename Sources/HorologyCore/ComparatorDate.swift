@@ -3,7 +3,7 @@
 //  Horology
 //
 //  Created by Paul Schifferer on 24/8/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
+//  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
 import Foundation
@@ -32,13 +32,13 @@ struct ComparatorDate {
         let calendar = Calendar.autoupdatingCurrent
         calendarId = calendar.asString()
         let comps = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second ], from: Date())
-        fromYear = comps.year ?? 2017
+        fromYear = comps.year ?? 2025
         fromMonth = comps.month ?? 0
         fromDay = comps.day ?? 1
         fromHour = comps.hour ?? 0
         fromMinute = comps.minute ?? 0
         fromSecond = comps.second ?? 0
-        toYear = comps.year ?? 2017
+        toYear = comps.year ?? 2025
         toMonth = comps.month ?? 0
         toDay = comps.day ?? 1
         toHour = comps.hour ?? 0

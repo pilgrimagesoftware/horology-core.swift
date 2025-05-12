@@ -3,7 +3,7 @@
 //  Horology
 //
 //  Created by Paul Schifferer on 8/9/17.
-//  Copyright © 2017 Pilgrimage Software. All rights reserved.
+//  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
 import Foundation
