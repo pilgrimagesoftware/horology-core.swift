@@ -9,8 +9,14 @@ import XCTest
 
 
 final class DateComponentsTests: XCTestCase {
+
     func testDateComponentsFromFields() {
-        let fields = DateFields(year: 2025, month: 1, day: 1, hour: 12, minute: 30, second: 45)
+        let fields = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                month: DateTimeField(type: .month, value: 1),
+                                day: DateTimeField(type: .day, value: 1),
+                                hour: DateTimeField(type: .hour, value: 12),
+                                minute: DateTimeField(type: .minute, value: 30),
+                                second: DateTimeField(type: .second, value: 45))
         let components = DateComponents.from(fields: fields)
 
         XCTAssertEqual(components.year, 2025)
@@ -34,7 +40,12 @@ final class DateComponentsTests: XCTestCase {
     }
 
     func testDateComponentsFromFieldsWithPartialValues() {
-        let fields = DateFields(year: 2025, month: nil, day: 1, hour: nil, minute: 30, second: nil)
+        let fields = DateFields(year: DateTimeField(type: .year, value:2025),
+                                month: nil,
+                                day: DateTimeField(type: .day, value: 1),
+                                hour: nil,
+                                minute: DateTimeField(type: .minute, value: 30),
+                                second: nil)
         let components = DateComponents.from(fields: fields)
 
         XCTAssertEqual(components.year, 2025)
@@ -46,7 +57,12 @@ final class DateComponentsTests: XCTestCase {
     }
 
     func testDateComponentsFromFieldsWithNegativeValues() {
-        let fields = DateFields(year: -2025, month: -1, day: -1, hour: -12, minute: -30, second: -45)
+        let fields = DateFields(year: DateTimeField(type: .year, value: -2025),
+                                month: DateTimeField(type: .month, value: -1),
+                                day: DateTimeField(type: .day, value: -1),
+                                hour: DateTimeField(type: .hour, value: -12),
+                                minute: DateTimeField(type: .minute, value: -30),
+                                second: DateTimeField(type: .second, value: -45))
         let components = DateComponents.from(fields: fields)
 
         XCTAssertEqual(components.year, -2025)
@@ -58,7 +74,12 @@ final class DateComponentsTests: XCTestCase {
     }
 
     func testDateComponentsFromFieldsWithZeroValues() {
-        let fields = DateFields(year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0)
+        let fields = DateFields(year: DateTimeField(type: .year, value: 0),
+                                month: DateTimeField(type: .month, value: 0),
+                                day: DateTimeField(type: .day, value: 0),
+                                hour: DateTimeField(type: .hour, value: 0),
+                                minute: DateTimeField(type: .minute, value: 0),
+                                second: DateTimeField(type: .second, value: 0))
         let components = DateComponents.from(fields: fields)
 
         XCTAssertEqual(components.year, 0)
