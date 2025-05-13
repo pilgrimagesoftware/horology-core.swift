@@ -28,7 +28,7 @@ class ValueConverter {
     }
 
     init(value: Int, valueType: ConversionValueType) {
-        self()
+        self.init()
         self.value = value
         self.valueType = valueType
     }
