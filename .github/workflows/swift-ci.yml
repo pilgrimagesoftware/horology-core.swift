@@ -68,13 +68,14 @@ jobs:
                 swift-version: ${{ needs.setup.outputs.swift-version }}
             - name: Build documentation
               run: |
+                    export SWIFTPM_ENABLE_COMMAND_PLUGINS=1
                     swift package --allow-writing-to-directory docs \
                           generate-documentation \
                           --target HorologyCore \
                           --output-path docs \
                           --disable-indexing \
                           --transform-for-static-hosting \
-                          --hosting-base-path horology
+                          --hosting-base-path horology-core
             - name: Commit and push generated documentation
               run: |
                     git config --local user.email "github-actions[bot]@users.noreply.github.com"
