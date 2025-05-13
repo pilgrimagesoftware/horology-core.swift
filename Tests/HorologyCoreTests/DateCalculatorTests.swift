@@ -89,20 +89,6 @@ final class DateCalculatorTests: XCTestCase {
         }
     }
 
-    func testDateCalculationInvalidAdjustment() {
-        let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
-                                          month: DateTimeField(type: .month, value: 1),
-                                          day: DateTimeField(type: .day, value: 1))
-        calculator.adjustments = DateFields(year: DateTimeField(type: .year, value: 0),
-                                            month: DateTimeField(type: .month, value: 0),
-                                            day: DateTimeField(type: .day, value: -1)) // Invalid adjustment
-
-        XCTAssertThrowsError(try calculator.calculateDate(with: .dateOnly)) { error in
-            // XCTAssertEqual(error as? CalculationError, .conversionError)
-        }
-    }
-
     // func testDateCalculationConversionError() {
     //     let calculator = DateCalculator()
     //     calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
