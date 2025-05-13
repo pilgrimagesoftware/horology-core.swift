@@ -89,7 +89,7 @@ final class DateFieldsTests: XCTestCase {
                                 second: DateTimeField(type: .second, value: 45))
         let dateFields = fields.asFields()
 
-        XCTAssertEqual(dateFields.length, 6)
+        XCTAssertEqual(dateFields.count, 6)
         XCTAssertEqual(dateFields[0].type, DateTimeFieldType.year)
         XCTAssertEqual(dateFields[0].value, 2025)
         XCTAssertEqual(dateFields[1].type, DateTimeFieldType.month)
