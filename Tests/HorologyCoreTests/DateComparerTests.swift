@@ -11,8 +11,12 @@ import XCTest
 final class DateComparerTests: XCTestCase {
     func testDateComparerWithOnlyDate() {
         let dateComparer = DateComparer()
-        dateComparer.firstDate = DateFields(year: 2025, month: 1, day: 1)
-        dateComparer.secondDate = DateFields(year: 2025, month: 1, day: 2)
+        dateComparer.firstDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                            month: DateTimeField(type: .month, value: 1),
+                                            day: DateTimeField(type: .day, value: 1))
+        dateComparer.secondDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                             month: DateTimeField(type: .month, value: 1),
+                                             day: DateTimeField(type: .day, value: 2))
 
         do {
             let result = try dateComparer.calculate(with: .dateOnly)
@@ -27,8 +31,12 @@ final class DateComparerTests: XCTestCase {
 
     func testDateComparerWithOnlyTime() {
         let dateComparer = DateComparer()
-        dateComparer.firstDate = DateFields(hour: 12, minute: 0, second: 0)
-        dateComparer.secondDate = DateFields(hour: 13, minute: 0, second: 0)
+        dateComparer.firstDate = DateFields(hour: DateTimeField(type: .hour, value: 12),
+                                            minute: DateTimeField(type: .minute, value: 0),
+                                            second: DateTimeField(type: .second, value: 0))
+        dateComparer.secondDate = DateFields(hour: DateTimeField(type: .hour, value: 13),
+                                             minute: DateTimeField(type: .minute, value: 0),
+                                             second: DateTimeField(type: .second, value: 0))
 
         do {
             let result = try dateComparer.calculate(with: .timeOnly)
@@ -43,8 +51,18 @@ final class DateComparerTests: XCTestCase {
 
     func testDateComparerWithDateAndTime() {
         let dateComparer = DateComparer()
-        dateComparer.firstDate = DateFields(year: 2025, month: 1, day: 1, hour: 12, minute: 0, second: 0)
-        dateComparer.secondDate = DateFields(year: 2025, month: 1, day: 2, hour: 13, minute: 0, second: 0)
+        dateComparer.firstDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                            month: DateTimeField(type: .month, value: 1),
+                                            day: DateTimeField(type: .day, value: 1),
+                                            hour: DateTimeField(type: .hour, value: 12),
+                                            minute: DateTimeField(type: .minute, value: 0),
+                                            second: DateTimeField(type: .second, value: 0))
+        dateComparer.secondDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                             month: DateTimeField(type: .month, value: 1),
+                                             day: DateTimeField(type: .day, value: 2),
+                                             hour: DateTimeField(type: .hour, value: 13),
+                                             minute: DateTimeField(type: .minute, value: 0),
+                                             second: DateTimeField(type: .second, value: 0))
 
         do {
             let result = try dateComparer.calculate(with: .both)
@@ -62,8 +80,12 @@ final class DateComparerTests: XCTestCase {
 
     func testDateComparerWithInvalidDate() {
         let dateComparer = DateComparer()
-        dateComparer.firstDate = DateFields(year: 2025, month: 1, day: 1)
-        dateComparer.secondDate = DateFields(year: 2025, month: 1, day: 32) // Invalid day
+        dateComparer.firstDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                            month: DateTimeField(type: .month, value: 1),
+                                            day: DateTimeField(type: .day, value: 1))
+        dateComparer.secondDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                             month: DateTimeField(type: .month, value: 1),
+                                             day: DateTimeField(type: .day, value: 32)) // Invalid day
 
         do {
             _ = try dateComparer.calculate(with: .dateOnly)
@@ -76,8 +98,12 @@ final class DateComparerTests: XCTestCase {
 
     func testDateComparerWithInvalidTime() {
         let dateComparer = DateComparer()
-        dateComparer.firstDate = DateFields(hour: 12, minute: 0, second: 0)
-        dateComparer.secondDate = DateFields(hour: 25, minute: 0, second: 0) // Invalid hour
+        dateComparer.firstDate = DateFields(hour: DateTimeField(type: .hour, value: 12),
+                                            minute: DateTimeField(type: .minute, value: 0),
+                                            second: DateTimeField(type: .second, value: 0))
+        dateComparer.secondDate = DateFields(hour: DateTimeField(type: .hour, value: 25),
+                                             minute: DateTimeField(type: .minute, value: 0),
+                                             second: DateTimeField(type: .second, value: 0)) // Invalid hour
 
         do {
             _ = try dateComparer.calculate(with: .timeOnly)
@@ -90,8 +116,18 @@ final class DateComparerTests: XCTestCase {
 
     func testDateComparerWithInvalidDateAndTime() {
         let dateComparer = DateComparer()
-        dateComparer.firstDate = DateFields(year: 2025, month: 1, day: 1, hour: 12, minute: 0, second: 0)
-        dateComparer.secondDate = DateFields(year: 2025, month: 1, day: 2, hour: 25, minute: 0, second: 0) // Invalid hour
+        dateComparer.firstDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                            month: DateTimeField(type: .month, value: 1),
+                                            day: DateTimeField(type: .day, value: 1),
+                                            hour: DateTimeField(type: .hour, value: 12),
+                                            minute: DateTimeField(type: .minute, value: 0),
+                                            second: DateTimeField(type: .second, value: 0))
+        dateComparer.secondDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                             month: DateTimeField(type: .month, value: 1),
+                                             day: DateTimeField(type: .day, value: 2),
+                                             hour: DateTimeField(type: .hour, value: 25),
+                                             minute: DateTimeField(type: .minute, value: 0),
+                                             second: DateTimeField(type: .second, value: 0)) // Invalid hour
 
         do {
             _ = try dateComparer.calculate(with: .both)
