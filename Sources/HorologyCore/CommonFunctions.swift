@@ -7,6 +7,9 @@
 import Foundation
 
 
+/**
+ * Adjusts the date fields by the given adjustment value.
+ */
 func handleAdjustment(by adjustment : Int, on field : DateTimeFieldType?, with fields : DateFields) -> DateFields? {
     guard let field = field else { return nil }
 
