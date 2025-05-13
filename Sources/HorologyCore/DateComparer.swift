@@ -8,7 +8,7 @@ import Foundation
 
 
 /**
- Initialize an instance of this class with a calendar and the two dates to compare. Call `calculate(with:)` whenever`
+ Initialize an instance of this class with a calendar and the two dates to compare. Call `calculate(with:)` whenever
  a result is desired.
  */
 class DateComparer {
