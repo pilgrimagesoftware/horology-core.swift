@@ -27,6 +27,12 @@ class ValueConverter {
         converters[.catYears] = convertToCatYears
     }
 
+    init(value: Int, valueType: ConversionValueType) {
+        self()
+        self.value = value
+        self.valueType = valueType
+    }
+
     func convert(to : ConversionValueType) -> ConvertedValue {
         return converters[to]?() ?? ConvertedValue(value: nil, approximate: false)
     }
