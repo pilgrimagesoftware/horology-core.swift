@@ -85,7 +85,7 @@ final class DateCalculatorTests: XCTestCase {
                                             day: DateTimeField(type: .day, value: 1))
 
         XCTAssertThrowsError(try calculator.calculateDate(with: .dateOnly)) { error in
-            XCTAssertEqual(error as? DateCalculatorError, .invalidDate)
+            XCTAssertEqual(error as? CalculationError, .invalidDate)
         }
     }
 
@@ -99,7 +99,7 @@ final class DateCalculatorTests: XCTestCase {
                                             day: DateTimeField(type: .day, value: -1)) // Invalid adjustment
 
         XCTAssertThrowsError(try calculator.calculateDate(with: .dateOnly)) { error in
-            XCTAssertEqual(error as? DateCalculatorError, .invalidAdjustment)
+            XCTAssertEqual(error as? CalculationError, .invalidAdjustment)
         }
     }
 
