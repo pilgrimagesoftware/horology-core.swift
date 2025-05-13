@@ -27,7 +27,7 @@ class ValueConverter {
         converters[.catYears] = convertToCatYears
     }
 
-    init(value: Int, valueType: ConversionValueType) {
+    convenience init(value: Int, valueType: ConversionValueType) {
         self.init()
         self.value = value
         self.valueType = valueType
