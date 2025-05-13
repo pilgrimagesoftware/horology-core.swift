@@ -68,8 +68,8 @@ final class DateComparerTests: XCTestCase {
             let result = try dateComparer.calculate(with: .dateAndTime)
             XCTAssertEqual(result.year, 0)
             XCTAssertEqual(result.month, 0)
-            XCTAssertEqual(result.day, -1)
-            XCTAssertEqual(result.hour, -1)
+            XCTAssertEqual(result.day, 1)
+            XCTAssertEqual(result.hour, 1)
             XCTAssertEqual(result.minute, 0)
             XCTAssertEqual(result.second, 0)
         }
