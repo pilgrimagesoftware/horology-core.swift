@@ -12,7 +12,7 @@ final class DateFieldsTests: XCTestCase {
 
     func testInitializationFromComponents() {
         let components = DateComponents(year: 2025, month: 1, day: 1, hour: 12, minute: 30, second: 45)
-        let dateFields = DateFields(from: components)
+        let dateFields = DateFields(components: components)
 
         XCTAssertEqual(dateFields.year?.value, 2025)
         XCTAssertEqual(dateFields.month?.value, 1)
@@ -31,7 +31,7 @@ final class DateFieldsTests: XCTestCase {
             DateTimeField(type: .minute, value: 30),
             DateTimeField(type: .second, value: 45)
         ]
-        let dateFields = DateFields(from: fields)
+        let dateFields = DateFields(fields: fields)
 
         XCTAssertEqual(dateFields.year?.value, 2025)
         XCTAssertEqual(dateFields.month?.value, 1)
@@ -58,7 +58,7 @@ final class DateFieldsTests: XCTestCase {
                                 hour: DateTimeField(type: .hour, value: 12),
                                 minute: DateTimeField(type: .minute, value: 30),
                                 second: DateTimeField(type: .second, value: 45))
-        let date = fields.date()
+        let date = fields.date(using: .autoupdatingCurrent)
 
         XCTAssertNotNil(date)
     }
@@ -70,7 +70,7 @@ final class DateFieldsTests: XCTestCase {
                                 hour: DateTimeField(type: .hour, value: 12),
                                 minute: DateTimeField(type: .minute, value: 30),
                                 second: DateTimeField(type: .second, value: 45))
-        let components = fields.dateComponents()
+        let components = fields.asComponents()
 
         XCTAssertEqual(components.year, 2025)
         XCTAssertEqual(components.month, 1)
@@ -87,20 +87,20 @@ final class DateFieldsTests: XCTestCase {
                                 hour: DateTimeField(type: .hour, value: 12),
                                 minute: DateTimeField(type: .minute, value: 30),
                                 second: DateTimeField(type: .second, value: 45))
-        let dateFields = fields.dateFields()
+        let dateFields = fields.asFields()
 
         XCTAssertEqual(dateFields.length, 6)
-        XCTAssertEqual(dateFields[0].type, .year)
+        XCTAssertEqual(dateFields[0].type, DateTimeFieldType.year)
         XCTAssertEqual(dateFields[0].value, 2025)
-        XCTAssertEqual(dateFields[1].type, .month)
+        XCTAssertEqual(dateFields[1].type, DateTimeFieldType.month)
         XCTAssertEqual(dateFields[1].value, 1)
-        XCTAssertEqual(dateFields[2].type, .day)
+        XCTAssertEqual(dateFields[2].type, DateTimeFieldType.day)
         XCTAssertEqual(dateFields[2].value, 1)
-        XCTAssertEqual(dateFields[3].type, .hour)
+        XCTAssertEqual(dateFields[3].type, DateTimeFieldType.hour)
         XCTAssertEqual(dateFields[3].value, 12)
-        XCTAssertEqual(dateFields[4].type, .minute)
+        XCTAssertEqual(dateFields[4].type, DateTimeFieldType.minute)
         XCTAssertEqual(dateFields[4].value, 30)
-        XCTAssertEqual(dateFields[5].type, .second)
+        XCTAssertEqual(dateFields[5].type, DateTimeFieldType.second)
         XCTAssertEqual(dateFields[5].value, 45)
     }
 }
