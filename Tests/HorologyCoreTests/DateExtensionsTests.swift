@@ -27,6 +27,6 @@ final class DateExtensionsTests: XCTestCase {
         let convertedDate = date.convert(fromCalendar: calendar, toCalendar: calendar)
 
         XCTAssertNotNil(convertedDate)
-        XCTAssertEqual(date.timeIntervalSince1970, convertedDate.timeIntervalSince1970)
+        XCTAssertEqual(date.timeIntervalSince1970, convertedDate?.timeIntervalSince1970)
     }
 }
