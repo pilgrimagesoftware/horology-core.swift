@@ -77,7 +77,7 @@ extension Calendar {
     }
 
     var label : String {
-            return NSLocalizedString("calendar.identifier.\(self.identifier)", comment: "")
+        return NSLocalizedString("calendar.identifier.\(self.identifier)", comment: "")
     }
 
 }

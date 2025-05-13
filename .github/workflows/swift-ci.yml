@@ -1,6 +1,8 @@
 name: CI
 
-concurrency: ci
+concurrency:
+    group: ci
+    cancel-in-progress: true
 
 on:
     push:
@@ -14,6 +16,7 @@ on:
 
 permissions:
     contents: write
+    pages: write
 
 jobs:
     tests:
@@ -45,25 +48,37 @@ jobs:
               run: |
                     swift test -v
 
-
-    #    docs:
-    #        needs: [tests]
-    #        runs-on: ubuntu-latest
-    #        concurrency: docs
-    #        steps:
-    #            - uses: actions/checkout@v4
-    #            - uses: actions/setup-python@v5
-    #              with:
-    #                  python-version: "3.11"
-    #            - name: install-deps
-    #              run: pip install -r requirements/docs.txt
-    #            - name: make-docs
-    #              run: cd docs && make html
-    #            - name: publish-docs
-    #              uses: peaceiris/actions-gh-pages@v4
-    #              with:
-    #                  github_token: ${{ secrets.GITHUB_TOKEN }}
-    #                  publish_dir: ./docs/_build/html
+    docs:
+        needs: [tests]
+        runs-on: ubuntu-latest
+        concurrency: docs
+        steps:
+            - uses: actions/checkout@v4
+            - name: Get swift version
+              id: get_swift_version
+              run: |
+                    v=$(cat .swift-version)
+                    echo "swift_version=$v" >> $GITHUB_OUTPUT
+            - uses: swift-actions/setup-swift@v2
+              with:
+                swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
+            - name: Build documentation
+              run: |
+                    swift package --allow-writing-to-directory docs \
+                          generate-documentation \
+                          --target HorologyCore \
+                          --output-path docs \
+                          --disable-indexing \
+                          --transform-for-static-hosting \
+                          --hosting-base-path horology
+            - name: Commit and push generated documentation
+              run: |
+                    git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                    git config --local user.name "github-actions[bot]"
+                    git switch gh-pages
+                    git add ./docs
+                    git commit -a -m "Generated Swift DocC"
+                    git push origin gh-pages
 
     tag:
         needs: [tests]
