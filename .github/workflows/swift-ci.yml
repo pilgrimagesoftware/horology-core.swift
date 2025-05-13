@@ -60,6 +60,7 @@ jobs:
     docs:
         needs: [setup, tests]
         runs-on: ubuntu-latest
+        continue-on-error: true
         concurrency: docs
         steps:
             - uses: actions/checkout@v4
