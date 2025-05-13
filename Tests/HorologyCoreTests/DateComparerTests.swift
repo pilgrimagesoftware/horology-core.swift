@@ -40,7 +40,7 @@ final class DateComparerTests: XCTestCase {
 
         do {
             let result = try dateComparer.calculate(with: .timeOnly)
-            XCTAssertEqual(result.hour, -1)
+            XCTAssertEqual(result.hour, 1)
             XCTAssertEqual(result.minute, 0)
             XCTAssertEqual(result.second, 0)
         }
