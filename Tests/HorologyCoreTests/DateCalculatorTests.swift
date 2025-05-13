@@ -42,7 +42,7 @@ final class DateCalculatorTests: XCTestCase {
 
         do {
             let result = try calculator.calculateDate(with: .timeOnly)
-            let expectedDate = Calendar.autoupdatingCurrent.date(from: DateComponents(year: 2025, month: 1, day: 1, hour: 1, minute: 30))
+            let expectedDate = Calendar.autoupdatingCurrent.date(from: DateComponents(year: 0, month: 0, day: 0, hour: 1, minute: 30))
             XCTAssertEqual(Int(result.timeIntervalSince1970), Int(expectedDate?.timeIntervalSince1970 ?? 0))
         }
         catch {

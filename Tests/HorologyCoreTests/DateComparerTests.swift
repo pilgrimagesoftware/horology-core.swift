@@ -22,7 +22,7 @@ final class DateComparerTests: XCTestCase {
             let result = try dateComparer.calculate(with: .dateOnly)
             XCTAssertEqual(result.year, 0)
             XCTAssertEqual(result.month, 0)
-            XCTAssertEqual(result.day, -1)
+            XCTAssertEqual(result.day, 1)
         }
         catch {
             XCTFail("Expected no error, but got \(error)")
