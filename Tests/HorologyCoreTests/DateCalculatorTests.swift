@@ -11,8 +11,12 @@ import XCTest
 final class DateCalculatorTests: XCTestCase {
     func testDateCalculationDateOnly() {
         let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: 2025, month: 1, day: 1)
-        calculator.adjustments = DateFields(year: 0, month: 0, day: 1)
+        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                          month: DateTimeField(type: .month, value: 1),
+                                          day: DateTimeField(type: .day, value: 1))
+        calculator.adjustments = DateFields(year: DateTimeField(type: .year, value: 0),
+                                            month: DateTimeField(type: .month, value: 0),
+                                            day: DateTimeField(type: .day, value: 1))
 
         do {
             let result = try calculator.calculateDate(with: .dateOnly)
@@ -26,8 +30,15 @@ final class DateCalculatorTests: XCTestCase {
 
     func testDateCalculationTimeOnly() {
         let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: 2025, month: 1, day: 1, hour: 0, minute: 0, second: 0)
-        calculator.adjustments = DateFields(hour: 1, minute: 30, second: 0)
+        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                          month: DateTimeField(type: .month, value: 1),
+                                          day: DateTimeField(type: .day, value: 1),
+                                          hour: DateTimeField(type: .hour, value: 0),
+                                          minute: DateTimeField(type: .minute, value: 0),
+                                          second: DateTimeField(type: .second, value: 0))
+        calculator.adjustments = DateFields(hour: DateTimeField(type: .hour, value: 1),
+                                            minute: DateTimeField(type: .minute, value: 30),
+                                            second: DateTimeField(type: .second, value: 0))
 
         do {
             let result = try calculator.calculateDate(with: .timeOnly)
@@ -41,8 +52,18 @@ final class DateCalculatorTests: XCTestCase {
 
     func testDateCalculationDateAndTime() {
         let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: 2025, month: 1, day: 1, hour: 0, minute: 0, second: 0)
-        calculator.adjustments = DateFields(year: 0, month: 0, day: 1, hour: 1, minute: 30, second: 0)
+        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                          month: DateTimeField(type: .month, value: 1),
+                                          day: DateTimeField(type: .day, value: 1),
+                                          hour: DateTimeField(type: .hour, value: 0),
+                                          minute: DateTimeField(type: .minute, value: 0),
+                                          second: DateTimeField(type: .second, value: 0))
+        calculator.adjustments = DateFields(year: DateTimeField(type: .year, value: 0),
+                                            month: DateTimeField(type: .month, value: 0),
+                                            day: DateTimeField(type: .day, value: 1),
+                                            hour: DateTimeField(type: .hour, value: 1),
+                                            minute: DateTimeField(type: .minute, value: 30),
+                                            second: DateTimeField(type: .second, value: 0))
 
         do {
             let result = try calculator.calculateDate(with: .dateAndTime)
@@ -56,8 +77,12 @@ final class DateCalculatorTests: XCTestCase {
 
     func testDateCalculationInvalidDate() {
         let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: 2025, month: 1, day: 32) // Invalid date
-        calculator.adjustments = DateFields(year: 0, month: 0, day: 1)
+        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                          month: DateTimeField(type: .month, value: 1),
+                                          day: DateTimeField(type: .day, value: 32)) // Invalid date
+        calculator.adjustments = DateFields(year: DateTimeField(type: .year, value: 0),
+                                            month: DateTimeField(type: .month, value: 0),
+                                            day: DateTimeField(type: .day, value: 1))
 
         XCTAssertThrowsError(try calculator.calculateDate(with: .dateOnly)) { error in
             XCTAssertEqual(error as? DateCalculatorError, .invalidDate)
@@ -66,8 +91,12 @@ final class DateCalculatorTests: XCTestCase {
 
     func testDateCalculationInvalidAdjustment() {
         let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: 2025, month: 1, day: 1)
-        calculator.adjustments = DateFields(year: 0, month: 0, day: -1) // Invalid adjustment
+        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                          month: DateTimeField(type: .month, value: 1),
+                                          day: DateTimeField(type: .day, value: 1))
+        calculator.adjustments = DateFields(year: DateTimeField(type: .year, value: 0),
+                                            month: DateTimeField(type: .month, value: 0),
+                                            day: DateTimeField(type: .day, value: -1)) // Invalid adjustment
 
         XCTAssertThrowsError(try calculator.calculateDate(with: .dateOnly)) { error in
             XCTAssertEqual(error as? DateCalculatorError, .invalidAdjustment)
@@ -76,8 +105,12 @@ final class DateCalculatorTests: XCTestCase {
 
     func testDateCalculationConversionError() {
         let calculator = DateCalculator()
-        calculator.startDate = DateFields(year: 2025, month: 1, day: 1)
-        calculator.adjustments = DateFields(year: 0, month: 0, day: 1)
+        calculator.startDate = DateFields(year: DateTimeField(type: .year, value: 2025),
+                                          month: DateTimeField(type: .month, value: 1),
+                                          day: DateTimeField(type: .day, value: 1))
+        calculator.adjustments = DateFields(year: DateTimeField(type: .year, value: 0),
+                                            month: DateTimeField(type: .month, value: 0),
+                                            day: DateTimeField(type: .day, value: 1))
 
         // Simulate a conversion error
         calculator.calendar = Calendar(identifier: .gregorian) // Use a different calendar
