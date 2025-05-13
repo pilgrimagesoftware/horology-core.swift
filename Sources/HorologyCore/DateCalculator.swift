@@ -18,8 +18,8 @@ class DateCalculator {
     var calendar : Calendar = Calendar.autoupdatingCurrent
 
     /**
-     Perform a date calculation with the
- */
+     Perform a date calculation with the given mode.
+     */
     func calculateDate(with mode : DateTimeMode) throws -> Date {
         // validate the first date
         try DateFieldsValidator(fields: self.startDate).validate(using: mode, calendar: self.calendar)
