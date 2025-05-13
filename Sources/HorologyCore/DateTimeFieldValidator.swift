@@ -7,15 +7,15 @@
 import Foundation
 
 
-class DateTimeFieldValidator {
+public class DateTimeFieldValidator {
 
     private var field : DateTimeField
 
-    init(field : DateTimeField) {
+    public init(field : DateTimeField) {
         self.field = field
     }
 
-    func validate(using calendar : Calendar) throws {
+    public func validate(using calendar : Calendar) throws {
         guard let minValue = calendar.minimumRange(of: field.type.calendarComponent()) else { throw DateTimeFieldValidationError.invalidRange(field.type) }
         guard let maxValue = calendar.maximumRange(of: field.type.calendarComponent()) else { throw DateTimeFieldValidationError.invalidRange(field.type) }
 
@@ -27,7 +27,7 @@ class DateTimeFieldValidator {
 }
 
 
-enum DateTimeFieldValidationError : Error {
+public enum DateTimeFieldValidationError : Error {
     case invalidRange(DateTimeFieldType)
     case outOfRange(DateTimeFieldType)
 }

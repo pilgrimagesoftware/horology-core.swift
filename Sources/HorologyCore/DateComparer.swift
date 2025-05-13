@@ -11,11 +11,11 @@ import Foundation
  Initialize an instance of this class with a calendar and the two dates to compare. Call `calculate(with:)` whenever
  a result is desired.
  */
-class DateComparer {
+public class DateComparer {
 
-    var firstDate : DateFields = DateFields()
-    var secondDate : DateFields = DateFields()
-    var calendar : Calendar = Calendar.autoupdatingCurrent
+    public var firstDate : DateFields = DateFields()
+    public var secondDate : DateFields = DateFields()
+    public var calendar : Calendar = Calendar.autoupdatingCurrent
 
     /**
      Perform a date comparison with the two dates provided, using the configured calendar. If the date values are
@@ -25,7 +25,7 @@ class DateComparer {
      - returns: the comparison result in a DateComponents value object
      - throws: validation error if either date is incomplete or invalid
      */
-    func calculate(with mode : DateTimeMode) throws -> DateComponents {
+    public func calculate(with mode : DateTimeMode) throws -> DateComponents {
         // validate the first date
         try DateFieldsValidator(fields: self.firstDate).validate(using: mode, calendar: self.calendar)
         // validate the second date
@@ -75,6 +75,6 @@ class DateComparer {
 }
 
 
-enum ComparisonError : Error {
+public enum ComparisonError : Error {
     case conversionError(DateFields)
 }

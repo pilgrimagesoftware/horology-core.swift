@@ -5,7 +5,7 @@
 //
 
 
-enum DateTimeMode : String {
+public enum DateTimeMode : String {
     case dateOnly
     case timeOnly
     case dateAndTime

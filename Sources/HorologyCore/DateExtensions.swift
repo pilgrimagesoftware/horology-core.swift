@@ -7,7 +7,7 @@
 import Foundation
 
 
-extension Date {
+public extension Date {
 
     func convert(fromCalendar : Calendar, toCalendar : Calendar) -> Date? {
         let originalComps = fromCalendar.dateComponents([ .year, .month, .day, .hour, .minute, .second ], from: self)

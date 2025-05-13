@@ -7,7 +7,7 @@
 import Foundation
 
 
-extension Calendar {
+public extension Calendar {
 
     static var identifiers : [Calendar.Identifier] {
         return [

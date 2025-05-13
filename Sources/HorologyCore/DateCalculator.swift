@@ -11,16 +11,16 @@ import Foundation
  Initialize an instance of this class to calculate a new date from a starting date and a set of adjustments.
  Set the date and the adjustments and then call `calculateDate(with:)` to get the result.
  */
-class DateCalculator {
+public class DateCalculator {
 
-    var startDate : DateFields = DateFields()
-    var adjustments : DateFields = DateFields()
-    var calendar : Calendar = Calendar.autoupdatingCurrent
+    public var startDate : DateFields = DateFields()
+    public var adjustments : DateFields = DateFields()
+    public var calendar : Calendar = Calendar.autoupdatingCurrent
 
     /**
      Perform a date calculation with the given mode.
      */
-    func calculateDate(with mode : DateTimeMode) throws -> Date {
+    public func calculateDate(with mode : DateTimeMode) throws -> Date {
         // validate the first date
         try DateFieldsValidator(fields: self.startDate).validate(using: mode, calendar: self.calendar)
 
@@ -70,6 +70,6 @@ class DateCalculator {
 }
 
 
-enum CalculationError : Error {
+public enum CalculationError : Error {
     case conversionError(DateFields)
 }

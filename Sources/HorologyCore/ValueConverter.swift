@@ -7,15 +7,15 @@
 import Foundation
 
 
-class ValueConverter {
+public class ValueConverter {
 
     private var calendar : Calendar = Calendar.autoupdatingCurrent
     private var converters : [ConversionValueType : () -> ConvertedValue] = [:]
 
-    var value : Int = 0
-    var valueType : ConversionValueType = .years
+    public var value : Int = 0
+    public var valueType : ConversionValueType = .years
 
-    init() {
+    public init() {
         converters[.years] = convertToYears
         converters[.months] = convertToMonths
         converters[.weeks] = convertToWeeks
@@ -27,13 +27,13 @@ class ValueConverter {
         converters[.catYears] = convertToCatYears
     }
 
-    convenience init(value: Int, valueType: ConversionValueType) {
+    public convenience init(value: Int, valueType: ConversionValueType) {
         self.init()
         self.value = value
         self.valueType = valueType
     }
 
-    func convert(to : ConversionValueType) -> ConvertedValue {
+    public func convert(to : ConversionValueType) -> ConvertedValue {
         return converters[to]?() ?? ConvertedValue(value: nil, approximate: false)
     }
 
@@ -382,12 +382,12 @@ class ValueConverter {
 
 }
 
-struct ConvertedValue {
-    var value : Int?
-    var approximate : Bool
+public struct ConvertedValue {
+    public var value : Int?
+    public var approximate : Bool
 }
 
-enum ConversionValueType : String {
+public enum ConversionValueType : String {
     case years = "years"
     case months = "months"
     case weeks = "weeks"

@@ -7,15 +7,15 @@
 import Foundation
 
 
-class DateFieldsValidator {
+public class DateFieldsValidator {
 
     private var fields : DateFields
 
-    init(fields : DateFields) {
+    public init(fields : DateFields) {
         self.fields = fields
     }
 
-    func validate(using mode : DateTimeMode, calendar : Calendar) throws {
+    public func validate(using mode : DateTimeMode, calendar : Calendar) throws {
         if mode == .dateAndTime || mode == .dateOnly {
             // year
             guard let year = fields.year else { throw DateFieldsValidationError.missingField(.year) }
@@ -50,6 +50,6 @@ class DateFieldsValidator {
 }
 
 
-enum DateFieldsValidationError : Error {
+public enum DateFieldsValidationError : Error {
     case missingField(DateTimeFieldType)
 }

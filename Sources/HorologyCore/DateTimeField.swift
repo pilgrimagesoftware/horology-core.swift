@@ -7,7 +7,7 @@
 import Foundation
 
 
-enum DateTimeFieldType : String {
+public enum DateTimeFieldType : String {
     case year
     case month
     case day
@@ -15,7 +15,7 @@ enum DateTimeFieldType : String {
     case minute
     case second
 
-    func calendarComponent() -> Calendar.Component {
+    public func calendarComponent() -> Calendar.Component {
         switch self {
         case .year:
             return .year
@@ -38,19 +38,19 @@ enum DateTimeFieldType : String {
     }
 }
 
-enum FieldValidity {
+public enum FieldValidity {
     case valid
     case outOfRange
     case noValue
     case invalidValue
 }
 
-struct DateTimeField {
-    var type : DateTimeFieldType
-    var value : Int
-    var validity : FieldValidity
+public struct DateTimeField {
+    public var type : DateTimeFieldType
+    public var value : Int
+    public var validity : FieldValidity
 
-    init(type : DateTimeFieldType, value : Int) {
+    public init(type : DateTimeFieldType, value : Int) {
         self.type = type
         self.value = value
         self.validity = .valid

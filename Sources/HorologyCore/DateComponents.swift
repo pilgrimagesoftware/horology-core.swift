@@ -7,7 +7,7 @@
 import Foundation
 
 
-extension DateComponents {
+public extension DateComponents {
 
     static func from(fields : DateFields) -> DateComponents {
 

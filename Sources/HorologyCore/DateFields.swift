@@ -7,7 +7,7 @@
 import Foundation
 
 
-struct DateFields {
+public struct DateFields {
     var year : DateTimeField?
     var month : DateTimeField?
     var day : DateTimeField?
@@ -17,7 +17,7 @@ struct DateFields {
 }
 
 
-extension DateFields {
+public extension DateFields {
 
     init(components : DateComponents) {
         if let v = components.year {

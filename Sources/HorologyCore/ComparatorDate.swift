@@ -11,7 +11,7 @@ import Foundation
  A value object used to represent date information for the comparator that the user wishes to maintain, for example,
  in persisted storage.
  */
-struct ComparatorDate {
+public struct ComparatorDate {
     var calendarId : String
     var fromYear : Int
     var fromMonth : Int
@@ -26,7 +26,7 @@ struct ComparatorDate {
     var toMinute : Int
     var toSecond : Int
 
-    init() {
+    public init() {
         let calendar = Calendar.autoupdatingCurrent
         calendarId = calendar.asString()
         let comps = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second ], from: Date())
