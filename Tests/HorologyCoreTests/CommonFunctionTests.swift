@@ -9,4 +9,7 @@ import XCTest
 
 
 final class CommonFunctionTests: XCTestCase {
+    func testSomething() {
+
+    }
 }

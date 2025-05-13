@@ -19,7 +19,21 @@ permissions:
     pages: write
 
 jobs:
+    setup:
+        name: Setup
+        runs-on: ubuntu-latest
+        outputs:
+            swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Get swift version
+              id: get_swift_version
+              run: |
+                    v=$(cat .swift-version)
+                    echo "swift_version=$v" >> $GITHUB_OUTPUT
+
     tests:
+        needs: [setup]
         name: ${{ matrix.name }}
         runs-on: ${{ matrix.os }}
         strategy:
@@ -30,14 +44,9 @@ jobs:
                       os: ubuntu-24.04
         steps:
             - uses: actions/checkout@v4
-            - name: Get swift version
-              id: get_swift_version
-              run: |
-                    v=$(cat .swift-version)
-                    echo "swift_version=$v" >> $GITHUB_OUTPUT
             - uses: swift-actions/setup-swift@v2
               with:
-                swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
+                swift-version: ${{ needs.setup.outputs.swift-version }}
             - name: Verify swift version
               run: |
                     swift --version
@@ -49,19 +58,14 @@ jobs:
                     swift test -v
 
     docs:
-        needs: [tests]
+        needs: [setup, tests]
         runs-on: ubuntu-latest
         concurrency: docs
         steps:
             - uses: actions/checkout@v4
-            - name: Get swift version
-              id: get_swift_version
-              run: |
-                    v=$(cat .swift-version)
-                    echo "swift_version=$v" >> $GITHUB_OUTPUT
             - uses: swift-actions/setup-swift@v2
               with:
-                swift-version: ${{ steps.get_swift_version.outputs.swift_version }}
+                swift-version: ${{ needs.setup.outputs.swift-version }}
             - name: Build documentation
               run: |
                     swift package --allow-writing-to-directory docs \
@@ -107,10 +111,6 @@ jobs:
             - name: Get latest tag
               id: get_latest_tag
               uses: actions-ecosystem/action-get-latest-tag@v1
-            # - name: Publish
-            #   env:
-            #     GOPROXY: proxy.golang.org
-            #   run: go list -m github.com/pilgrimagesoftware/common@${{ steps.get_latest_tag.outputs.tag }}
 
     notify:
         needs: [tag]
