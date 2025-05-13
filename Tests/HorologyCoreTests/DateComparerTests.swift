@@ -65,7 +65,7 @@ final class DateComparerTests: XCTestCase {
                                              second: DateTimeField(type: .second, value: 0))
 
         do {
-            let result = try dateComparer.calculate(with: .both)
+            let result = try dateComparer.calculate(with: .dateAndTime)
             XCTAssertEqual(result.year, 0)
             XCTAssertEqual(result.month, 0)
             XCTAssertEqual(result.day, -1)
@@ -130,7 +130,7 @@ final class DateComparerTests: XCTestCase {
                                              second: DateTimeField(type: .second, value: 0)) // Invalid hour
 
         do {
-            _ = try dateComparer.calculate(with: .both)
+            _ = try dateComparer.calculate(with: .dateAndTime)
             XCTFail("Expected an error, but got none")
         }
         catch {
