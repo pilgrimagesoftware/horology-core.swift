@@ -7,7 +7,7 @@
 import Foundation
 
 
-public enum DateTimeFieldType : String {
+public enum DateTimeFieldType : String, Sendable {
     case year
     case month
     case day

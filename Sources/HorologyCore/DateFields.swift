@@ -17,6 +17,9 @@ public struct DateFields {
 }
 
 
+public extension DateFields : Sendable {}
+
+
 public extension DateFields {
 
     init(components : DateComponents) {
@@ -84,7 +87,7 @@ public extension DateFields {
 
     func asFields() -> [DateTimeField] {
         return [ self.year, self.month, self.day,
-                 self.hour, self.minute, self.second ].flatMap({ $0 })
+                 self.hour, self.minute, self.second ].compactMap({ $0 })
     }
 
 }
