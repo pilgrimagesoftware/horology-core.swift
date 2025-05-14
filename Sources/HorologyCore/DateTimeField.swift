@@ -38,7 +38,7 @@ public enum DateTimeFieldType : String, Sendable {
     }
 }
 
-public enum FieldValidity : Sendable{
+public enum FieldValidity : Sendable {
     case valid
     case outOfRange
     case noValue
