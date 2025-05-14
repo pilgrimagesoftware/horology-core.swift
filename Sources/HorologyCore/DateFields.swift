@@ -17,7 +17,7 @@ public struct DateFields {
 }
 
 
-public extension DateFields : Sendable {}
+extension DateFields : Sendable {}
 
 
 public extension DateFields {
