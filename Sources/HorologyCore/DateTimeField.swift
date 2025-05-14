@@ -38,14 +38,14 @@ public enum DateTimeFieldType : String, Sendable {
     }
 }
 
-public enum FieldValidity {
+public enum FieldValidity : Sendable{
     case valid
     case outOfRange
     case noValue
     case invalidValue
 }
 
-public struct DateTimeField {
+public struct DateTimeField : Sendable {
     public var type : DateTimeFieldType
     public var value : Int
     public var validity : FieldValidity
