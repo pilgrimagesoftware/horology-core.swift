@@ -40,12 +40,12 @@ public class ValueConverter {
     private func convertToYears() -> ConvertedValue {
         guard valueType != .years else { return ConvertedValue(value: nil, approximate: false) }
 
-        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
-        let maxWeeks = (calendar.maximumRange(of: .weekOfYear)?.upperBound ?? 1) - 1
-        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1)
+        let maxWeeks = (calendar.maximumRange(of: .weekOfYear)?.upperBound ?? 1)
+        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1)
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
 
         switch valueType {
         case .months:
@@ -111,12 +111,12 @@ public class ValueConverter {
     private func convertToMonths() -> ConvertedValue {
         guard valueType != .months else { return ConvertedValue(value: nil, approximate: false) }
 
-        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
-        let maxWeeks = (calendar.maximumRange(of: .weekOfYear)?.upperBound ?? 1) - 1
-        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1)
+        let maxWeeks = (calendar.maximumRange(of: .weekOfYear)?.upperBound ?? 1)
+        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1)
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
 
         switch valueType {
         case .years:
@@ -153,12 +153,12 @@ public class ValueConverter {
     private func convertToWeeks() -> ConvertedValue {
         guard valueType != .weeks else { return ConvertedValue(value: nil, approximate: false) }
 
-        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
-        let maxWeeks = (calendar.maximumRange(of: .weekOfYear)?.upperBound ?? 1) - 1
-        let maxWeekdays = (calendar.maximumRange(of: .weekday)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1)
+        let maxWeekdays = (calendar.maximumRange(of: .weekday)?.upperBound ?? 1)
+        let maxWeeks = (calendar.maximumRange(of: .weekOfYear)?.upperBound ?? 1)
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
 
         switch valueType {
         case .years:
@@ -195,12 +195,12 @@ public class ValueConverter {
     private func convertToDays() -> ConvertedValue {
         guard valueType != .days else { return ConvertedValue(value: nil, approximate: false) }
 
-        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
+        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1)
         let maxWeekdays = (calendar.maximumRange(of: .weekday)?.upperBound ?? 1) - 1
         let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
 
         switch valueType {
         case .years:
@@ -237,12 +237,12 @@ public class ValueConverter {
     private func convertToHours() -> ConvertedValue {
         guard valueType != .hours else { return ConvertedValue(value: nil, approximate: false) }
 
-        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
+        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1)
         let maxWeekdays = (calendar.maximumRange(of: .weekday)?.upperBound ?? 1) - 1
-        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1)
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
 
         switch valueType {
         case .years:
@@ -279,12 +279,12 @@ public class ValueConverter {
     private func convertToMinutes() -> ConvertedValue {
         guard valueType != .minutes else { return ConvertedValue(value: nil, approximate: false) }
 
-        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
+        let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1)
         let maxWeekdays = (calendar.maximumRange(of: .weekday)?.upperBound ?? 1) - 1
-        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1)
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
 
         switch valueType {
         case .years:
@@ -322,11 +322,17 @@ public class ValueConverter {
         guard valueType != .seconds else { return ConvertedValue(value: nil, approximate: false) }
 
         let maxMonths = (calendar.maximumRange(of: .month)?.upperBound ?? 1) - 1
+        print(maxMonths)
         let maxWeekdays = (calendar.maximumRange(of: .weekday)?.upperBound ?? 1) - 1
+        print(maxWeekdays)
         let maxDays = (calendar.maximumRange(of: .day)?.upperBound ?? 1) - 1
-        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1) - 1
-        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1) - 1
-        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1) - 1
+        print(maxDays)
+        let maxHours = (calendar.maximumRange(of: .hour)?.upperBound ?? 1)
+        print(maxHours)
+        let maxMinutes = (calendar.maximumRange(of: .minute)?.upperBound ?? 1)
+        print(maxMinutes)
+        let maxSeconds = (calendar.maximumRange(of: .second)?.upperBound ?? 1)
+        print(maxSeconds)
 
         switch valueType {
         case .years:

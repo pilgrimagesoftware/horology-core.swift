@@ -4,73 +4,43 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Testing
 @testable import HorologyCore
 
 
-final class ValueConverterTests: XCTestCase {
-    func convertToYears() {
-    let result = ValueConverter(value: 13, valueType: .months)
-            .convert(to: .years)
+extension Tag {
+    @Tag static var conversion: Self
+}
 
-        XCTAssertEqual(result.value, 2)
-        XCTAssertEqual(result.approximate, true)
-    }
+@Suite
+struct ValueConverterTests {
+    let data : [(String, String, Int, Bool)] = [
+        ("years", "seconds", 32140800, true),
+        ("months", "seconds", 2678400, true),
+        ("months", "days", 31, true),
+        ("days", "seconds", 86400, false),
+        ("days", "hours", 24, false),
+        ("weeks", "days", 7, false),
+        ("days", "minutes", 1440, false),
+        ("hours", "seconds", 3600, false),
+        ("hours", "minutes", 60, false),
+        ("minutes", "seconds", 60, false),
+        ("dog-years", "years", 10, true),
+        ("cat-years", "years", 15, true),
+    ]
 
-    func testConvertToMonths() {
-        let result = ValueConverter(value: 5, valueType: .years)
-            .convert(to: .months)
+    @Test(.tags(.conversion))
+    func conversionTests() async throws {
+        for (fromUnit, toUnit, expectedValue, approximate) in data {
+            let fromType = try #require(ConversionValueType(rawValue: fromUnit))
+            let toType = try #require(ConversionValueType(rawValue: toUnit))
 
-        XCTAssertEqual(result.value, 60)
-        XCTAssertEqual(result.approximate, false)
-    }
+            let result = ValueConverter(value: 1, valueType: fromType)
+                .convert(to: toType)
 
-    func testConvertToDays() {
-        let result = ValueConverter(value: 2, valueType: .months)
-            .convert(to: .days)
-
-        XCTAssertEqual(result.value, 62)
-        XCTAssertEqual(result.approximate, true)
-    }
-
-    func convertToHours() {
-        let result = ValueConverter(value: 3, valueType: .days)
-            .convert(to: .hours)
-
-        XCTAssertEqual(result.value, 72)
-        XCTAssertEqual(result.approximate, false)
-    }
-
-    func convertToMinutes() {
-        let result = ValueConverter(value: 7, valueType: .hours)
-            .convert(to: .minutes)
-
-        XCTAssertEqual(result.value, 420)
-        XCTAssertEqual(result.approximate, false)
-    }
-
-    func convertToSeconds() {
-        let result = ValueConverter(value: 3, valueType: .hours)
-            .convert(to: .seconds)
-
-        XCTAssertEqual(result.value, 10800)
-        XCTAssertEqual(result.approximate, false)
-    }
-
-    func convertToDogYears() {
-        let result = ValueConverter(value: 3, valueType: .years)
-            .convert(to: .dogYears)
-
-        XCTAssertEqual(result.value, 21)
-        XCTAssertEqual(result.approximate, true)
-    }
-
-    func convertToCatYears() {
-        let result = ValueConverter(value: 3, valueType: .years)
-            .convert(to: .catYears)
-
-        XCTAssertEqual(result.value, 24)
-        XCTAssertEqual(result.approximate, true)
+            #expect(result.value == expectedValue, "\(fromType) -> \(toType) expected value is incorrect")
+            #expect(result.approximate == approximate, "\(fromType) -> \(toType) approximate value is incorrect")
+        }
     }
 
 }
