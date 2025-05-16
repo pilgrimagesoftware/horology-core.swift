@@ -9,14 +9,19 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "HorologyCore",
-            targets: ["HorologyCore"]),
+            targets: ["HorologyCore"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "HorologyCore",
+            dependencies: [
+                .product(name: "Logging", package: "swift-log")
+            ],
             swiftSettings: swiftSettings
         ),
         .testTarget(
@@ -27,7 +32,9 @@ let package = Package(
     ]
 )
 
-var swiftSettings: [SwiftSetting] { [
-    .enableUpcomingFeature("ExistentialAny"),
-    .swiftLanguageMode(.v5),
-] }
+var swiftSettings: [SwiftSetting] {
+    [
+        .enableUpcomingFeature("ExistentialAny"),
+        .swiftLanguageMode(.v5),
+    ]
+}
