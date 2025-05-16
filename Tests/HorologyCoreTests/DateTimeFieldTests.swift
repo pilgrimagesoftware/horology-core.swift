@@ -4,22 +4,29 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Testing
 @testable import HorologyCore
 
 
-final class DateTimeFieldTests: XCTestCase {
+extension Tag {
+    @Tag static var dateTimeField: Self
+}
 
+@Suite(.tags(.dateTimeField))
+struct DateTimeFieldTests {
+
+    @Test
     func testInitialization() {
         let field = DateTimeField(type: .year, value: 2025)
-        XCTAssertEqual(field.type, .year)
-        XCTAssertEqual(field.value, 2025)
-        XCTAssertEqual(field.validity, .valid)
+        #expect(field.type == .year)
+        #expect(field.value == 2025)
+        #expect(field.validity == .valid)
     }
 
+    @Test
     func testCalendarComponent() {
         let field = DateTimeField(type: .month, value: 1)
-        XCTAssertEqual(field.type.calendarComponent(), .month)
+        #expect(field.type.calendarComponent() == .month)
     }
 
 }

@@ -4,9 +4,10 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Testing
 @testable import HorologyCore
 
 
-final class DateFieldsValidatorTests: XCTestCase {
+@Suite(.tags(.dateFields, .validator))
+struct DateFieldsValidatorTests {
 }

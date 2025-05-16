@@ -4,29 +4,36 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import HorologyCore
 
 
-final class DateExtensionsTests: XCTestCase {
+extension Tag {
+    @Tag static var extensions: Self
+}
 
-    func testConvert() {
+@Suite(.tags(.date, .extensions))
+struct DateExtensionsTests {
+
+    @Test
+    func testConvert() throws {
         let date = Date()
         let fromCalendar = Calendar(identifier: .gregorian)
         let toCalendar = Calendar(identifier: .buddhist)
 
-        let convertedDate = date.convert(fromCalendar: fromCalendar, toCalendar: toCalendar)
-
-        XCTAssertNotNil(convertedDate)
+        _ = try #require(date.convert(fromCalendar: fromCalendar, toCalendar: toCalendar))
     }
 
-    func testConvertWithSameCalendar() {
+    @Test
+    func testConvertWithSameCalendar() throws {
         let date = Date()
         let calendar = Calendar(identifier: .gregorian)
 
         let convertedDate = date.convert(fromCalendar: calendar, toCalendar: calendar)
 
-        XCTAssertNotNil(convertedDate)
-        XCTAssertEqual(Int(date.timeIntervalSince1970), Int(convertedDate?.timeIntervalSince1970 ?? 0))
+        _ = try #require(convertedDate)
+        #expect(Int(date.timeIntervalSince1970) == Int(convertedDate?.timeIntervalSince1970 ?? 0))
     }
+
 }

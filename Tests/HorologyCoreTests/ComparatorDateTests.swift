@@ -4,27 +4,37 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import HorologyCore
 
 
-final class ComparatorDateTests: XCTestCase {
+extension Tag {
+    @Tag static var date: Self
+    @Tag static var comparator: Self
+}
+
+@Suite(.tags(.date, .comparator))
+struct ComparatorDateTests {
+
+    @Test
     func testComparatorDateInitialization() {
         let comparatorDate = ComparatorDate()
         // let now = Calendar.
 
-        XCTAssertEqual(comparatorDate.calendarId, Calendar.autoupdatingCurrent.asString())
-        // XCTAssertEqual(comparatorDate.fromYear, 2025)
-        // XCTAssertEqual(comparatorDate.fromMonth, 0)
-        // XCTAssertEqual(comparatorDate.fromDay, 1)
-        // XCTAssertEqual(comparatorDate.fromHour, 0)
-        // XCTAssertEqual(comparatorDate.fromMinute, 0)
-        // XCTAssertEqual(comparatorDate.fromSecond, 0)
-        // XCTAssertEqual(comparatorDate.toYear, 2025)
-        // XCTAssertEqual(comparatorDate.toMonth, 0)
-        // XCTAssertEqual(comparatorDate.toDay, 1)
-        // XCTAssertEqual(comparatorDate.toHour, 0)
-        // XCTAssertEqual(comparatorDate.toMinute, 0)
-        // XCTAssertEqual(comparatorDate.toSecond, 0)
+        #expect(comparatorDate.calendarId == Calendar.autoupdatingCurrent.asString())
+        // #expect(comparatorDate.fromYear, 2025)
+        // #expect(comparatorDate.fromMonth, 0)
+        // #expect(comparatorDate.fromDay, 1)
+        // #expect(comparatorDate.fromHour, 0)
+        // #expect(comparatorDate.fromMinute, 0)
+        // #expect(comparatorDate.fromSecond, 0)
+        // #expect(comparatorDate.toYear, 2025)
+        // #expect(comparatorDate.toMonth, 0)
+        // #expect(comparatorDate.toDay, 1)
+        // #expect(comparatorDate.toHour, 0)
+        // #expect(comparatorDate.toMinute, 0)
+        // #expect(comparatorDate.toSecond, 0)
     }
+
 }

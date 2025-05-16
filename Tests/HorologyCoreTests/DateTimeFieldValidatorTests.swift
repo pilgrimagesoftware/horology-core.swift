@@ -4,40 +4,39 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import HorologyCore
 
 
-final class DateTimeFieldValidatorTests: XCTestCase {
+extension Tag {
+    @Tag static var validator: Self
+}
 
-    func testValidation() {
+@Suite(.tags(.dateTimeField, .validator))
+struct DateTimeFieldValidatorTests {
+
+    @Test
+    func testValidation() throws {
         let field = DateTimeField(type: .day, value: 15)
         let validator = DateTimeFieldValidator(field: field)
         let calendar = Calendar(identifier: .gregorian)
 
-        do {
-            try validator.validate(using: calendar)
-            XCTAssertTrue(true, "Validation passed")
-        }
-        catch {
-            XCTFail("Validation failed with error: \(error)")
-        }
+        try validator.validate(using: calendar)
     }
 
-    func testValidationWithInvalidValue() {
+    @Test
+    func testValidationWithInvalidValue() throws {
         let field = DateTimeField(type: .day, value: 32)
         let validator = DateTimeFieldValidator(field: field)
         let calendar = Calendar(identifier: .gregorian)
 
         do {
             try validator.validate(using: calendar)
-            XCTFail("Validation should have failed")
+            Issue.record("Validation should have failed")
         }
         catch DateTimeFieldValidationError.outOfRange(let type) {
-            XCTAssertEqual(type, .day, "Expected day type")
-        }
-        catch {
-            XCTFail("Unexpected error: \(error)")
+            #expect(type == .day, "Expected day type")
         }
     }
 

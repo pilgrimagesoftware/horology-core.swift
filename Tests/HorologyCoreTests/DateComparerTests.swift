@@ -4,12 +4,15 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Testing
 @testable import HorologyCore
 
 
-final class DateComparerTests: XCTestCase {
-    func testDateComparerWithOnlyDate() {
+@Suite(.tags(.date, .comparator))
+struct DateComparerTests {
+
+    @Test
+    func testDateComparerWithOnlyDate() throws {
         let dateComparer = DateComparer()
         dateComparer.firstDate = DateFields(year: DateTimeField(type: .year, value: 2025),
                                             month: DateTimeField(type: .month, value: 1),
@@ -18,18 +21,14 @@ final class DateComparerTests: XCTestCase {
                                              month: DateTimeField(type: .month, value: 1),
                                              day: DateTimeField(type: .day, value: 2))
 
-        do {
-            let result = try dateComparer.calculate(with: .dateOnly)
-            XCTAssertEqual(result.year, 0)
-            XCTAssertEqual(result.month, 0)
-            XCTAssertEqual(result.day, 1)
-        }
-        catch {
-            XCTFail("Expected no error, but got \(error)")
-        }
+        let result = try dateComparer.calculate(with: .dateOnly)
+        #expect(result.year == 0)
+        #expect(result.month == 0)
+        #expect(result.day == 1)
     }
 
-    func testDateComparerWithOnlyTime() {
+    @Test
+    func testDateComparerWithOnlyTime() throws{
         let dateComparer = DateComparer()
         dateComparer.firstDate = DateFields(hour: DateTimeField(type: .hour, value: 12),
                                             minute: DateTimeField(type: .minute, value: 0),
@@ -38,18 +37,14 @@ final class DateComparerTests: XCTestCase {
                                              minute: DateTimeField(type: .minute, value: 0),
                                              second: DateTimeField(type: .second, value: 0))
 
-        do {
-            let result = try dateComparer.calculate(with: .timeOnly)
-            XCTAssertEqual(result.hour, 1)
-            XCTAssertEqual(result.minute, 0)
-            XCTAssertEqual(result.second, 0)
-        }
-         catch {
-            XCTFail("Expected no error, but got \(error)")
-        }
+        let result = try dateComparer.calculate(with: .timeOnly)
+        #expect(result.hour == 1)
+        #expect(result.minute == 0)
+        #expect(result.second == 0)
     }
 
-    func testDateComparerWithDateAndTime() {
+    @Test
+    func testDateComparerWithDateAndTime() throws {
         let dateComparer = DateComparer()
         dateComparer.firstDate = DateFields(year: DateTimeField(type: .year, value: 2025),
                                             month: DateTimeField(type: .month, value: 1),
@@ -64,18 +59,13 @@ final class DateComparerTests: XCTestCase {
                                              minute: DateTimeField(type: .minute, value: 0),
                                              second: DateTimeField(type: .second, value: 0))
 
-        do {
-            let result = try dateComparer.calculate(with: .dateAndTime)
-            XCTAssertEqual(result.year, 0)
-            XCTAssertEqual(result.month, 0)
-            XCTAssertEqual(result.day, 1)
-            XCTAssertEqual(result.hour, 1)
-            XCTAssertEqual(result.minute, 0)
-            XCTAssertEqual(result.second, 0)
-        }
-         catch {
-            XCTFail("Expected no error, but got \(error)")
-        }
+        let result = try dateComparer.calculate(with: .dateAndTime)
+        #expect(result.year == 0)
+        #expect(result.month == 0)
+        #expect(result.day == 1)
+        #expect(result.hour == 1)
+        #expect(result.minute == 0)
+        #expect(result.second == 0)
     }
 
     // func testDateComparerWithInvalidDate() {
@@ -137,4 +127,5 @@ final class DateComparerTests: XCTestCase {
     //         XCTAssertTrue(error is ComparisonError)
     //     }
     // }
+
 }

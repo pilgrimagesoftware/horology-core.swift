@@ -4,12 +4,19 @@
 //  Copyright © 2025 Pilgrimage Software. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import HorologyCore
 
 
-final class DateComponentsTests: XCTestCase {
+extension Tag {
+    @Tag static var components: Self
+}
 
+@Suite(.tags(.date, .components))
+struct DateComponentsTests {
+
+    @Test
     func testDateComponentsFromFields() {
         let fields = DateFields(year: DateTimeField(type: .year, value: 2025),
                                 month: DateTimeField(type: .month, value: 1),
@@ -19,26 +26,28 @@ final class DateComponentsTests: XCTestCase {
                                 second: DateTimeField(type: .second, value: 45))
         let components = DateComponents.from(fields: fields)
 
-        XCTAssertEqual(components.year, 2025)
-        XCTAssertEqual(components.month, 1)
-        XCTAssertEqual(components.day, 1)
-        XCTAssertEqual(components.hour, 12)
-        XCTAssertEqual(components.minute, 30)
-        XCTAssertEqual(components.second, 45)
+        #expect(components.year == 2025)
+        #expect(components.month == 1)
+        #expect(components.day == 1)
+        #expect(components.hour == 12)
+        #expect(components.minute == 30)
+        #expect(components.second == 45)
     }
 
+    @Test
     func testDateComponentsFromFieldsWithNilValues() {
         let fields = DateFields(year: nil, month: nil, day: nil, hour: nil, minute: nil, second: nil)
         let components = DateComponents.from(fields: fields)
 
-        XCTAssertNil(components.year)
-        XCTAssertNil(components.month)
-        XCTAssertNil(components.day)
-        XCTAssertNil(components.hour)
-        XCTAssertNil(components.minute)
-        XCTAssertNil(components.second)
+        #expect(components.year == nil)
+        #expect(components.month == nil)
+        #expect(components.day == nil)
+        #expect(components.hour == nil)
+        #expect(components.minute == nil)
+        #expect(components.second == nil)
     }
 
+    @Test
     func testDateComponentsFromFieldsWithPartialValues() {
         let fields = DateFields(year: DateTimeField(type: .year, value:2025),
                                 month: nil,
@@ -48,14 +57,15 @@ final class DateComponentsTests: XCTestCase {
                                 second: nil)
         let components = DateComponents.from(fields: fields)
 
-        XCTAssertEqual(components.year, 2025)
-        XCTAssertNil(components.month)
-        XCTAssertEqual(components.day, 1)
-        XCTAssertNil(components.hour)
-        XCTAssertEqual(components.minute, 30)
-        XCTAssertNil(components.second)
+        #expect(components.year == 2025)
+        #expect(components.month == nil)
+        #expect(components.day == 1)
+        #expect(components.hour == nil)
+        #expect(components.minute == 30)
+        #expect(components.second == nil)
     }
 
+    @Test
     func testDateComponentsFromFieldsWithNegativeValues() {
         let fields = DateFields(year: DateTimeField(type: .year, value: -2025),
                                 month: DateTimeField(type: .month, value: -1),
@@ -65,14 +75,15 @@ final class DateComponentsTests: XCTestCase {
                                 second: DateTimeField(type: .second, value: -45))
         let components = DateComponents.from(fields: fields)
 
-        XCTAssertEqual(components.year, -2025)
-        XCTAssertEqual(components.month, -1)
-        XCTAssertEqual(components.day, -1)
-        XCTAssertEqual(components.hour, -12)
-        XCTAssertEqual(components.minute, -30)
-        XCTAssertEqual(components.second, -45)
+        #expect(components.year == -2025)
+        #expect(components.month == -1)
+        #expect(components.day == -1)
+        #expect(components.hour == -12)
+        #expect(components.minute == -30)
+        #expect(components.second == -45)
     }
 
+    @Test
     func testDateComponentsFromFieldsWithZeroValues() {
         let fields = DateFields(year: DateTimeField(type: .year, value: 0),
                                 month: DateTimeField(type: .month, value: 0),
@@ -82,11 +93,12 @@ final class DateComponentsTests: XCTestCase {
                                 second: DateTimeField(type: .second, value: 0))
         let components = DateComponents.from(fields: fields)
 
-        XCTAssertEqual(components.year, 0)
-        XCTAssertEqual(components.month, 0)
-        XCTAssertEqual(components.day, 0)
-        XCTAssertEqual(components.hour, 0)
-        XCTAssertEqual(components.minute, 0)
-        XCTAssertEqual(components.second, 0)
+        #expect(components.year == 0)
+        #expect(components.month == 0)
+        #expect(components.day == 0)
+        #expect(components.hour == 0)
+        #expect(components.minute == 0)
+        #expect(components.second == 0)
     }
+
 }
