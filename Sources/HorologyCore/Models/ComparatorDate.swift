@@ -12,19 +12,19 @@ import Foundation
  in persisted storage.
  */
 public struct ComparatorDate {
-    var calendarId : String
-    var fromYear : Int
-    var fromMonth : Int
-    var fromDay : Int
-    var fromHour : Int
-    var fromMinute : Int
-    var fromSecond : Int
-    var toYear : Int
-    var toMonth : Int
-    var toDay : Int
-    var toHour : Int
-    var toMinute : Int
-    var toSecond : Int
+    public var calendarId : String
+    public var fromYear : Int
+    public var fromMonth : Int
+    public var fromDay : Int
+    public var fromHour : Int
+    public var fromMinute : Int
+    public var fromSecond : Int
+    public var toYear : Int
+    public var toMonth : Int
+    public var toDay : Int
+    public var toHour : Int
+    public var toMinute : Int
+    public var toSecond : Int
 
     public init() {
         let calendar = Calendar.autoupdatingCurrent

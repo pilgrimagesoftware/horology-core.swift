@@ -8,12 +8,12 @@ import Foundation
 
 
 public struct DateFields {
-    var year : DateTimeField?
-    var month : DateTimeField?
-    var day : DateTimeField?
-    var hour : DateTimeField?
-    var minute : DateTimeField?
-    var second : DateTimeField?
+    public var year : DateTimeField?
+    public var month : DateTimeField?
+    public var day : DateTimeField?
+    public var hour : DateTimeField?
+    public var minute : DateTimeField?
+    public var second : DateTimeField?
 }
 
 
