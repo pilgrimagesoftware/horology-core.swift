@@ -16,7 +16,7 @@ public extension Calendar {
         ]
     }
 
-    static func from(identifier : String) -> Calendar {
+    static func from(identifier : String) throws -> Calendar {
         switch identifier {
         case "buddhist":
             return Calendar(identifier: .buddhist)
@@ -66,10 +66,9 @@ public extension Calendar {
         case "republicOfChina":
             return Calendar(identifier: .republicOfChina)
 
-        default: break
+        default:
+            throw HorologyError.invalidCalendarIdentifier(identifier)
         }
-
-        return Calendar.autoupdatingCurrent
     }
 
     func asString() -> String {

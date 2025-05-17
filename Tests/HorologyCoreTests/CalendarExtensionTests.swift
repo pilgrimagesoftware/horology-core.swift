@@ -6,8 +6,8 @@
 
 import Foundation
 import Testing
-@testable import HorologyCore
 
+@testable import HorologyCore
 
 extension Tag {
     @Tag static var calendar: Self
@@ -18,20 +18,27 @@ struct CalendarExtensionTests {
 
     @Test
     func testFrom() throws {
-        let calendar = Calendar.from(identifier: "gregorian")
+        let calendar = try Calendar.from(identifier: "gregorian")
         #expect(calendar.identifier == .gregorian)
     }
 
     @Test
     func testAsString() throws {
-        let calendar = Calendar.from(identifier: "gregorian")
+        let calendar = try Calendar.from(identifier: "gregorian")
         #expect(calendar.asString() == "gregorian")
     }
 
     @Test
     func testLabel() throws {
-        let calendar = Calendar.from(identifier: "gregorian")
+        let calendar = try Calendar.from(identifier: "gregorian")
         #expect(calendar.label == "calendar.identifier.gregorian")
+    }
+
+    @Test
+    func testInvalidIdentifier() throws {
+        #expect(throws: (any Error).self) {
+            try Calendar.from(identifier: "invalid")
+        }
     }
 
 }

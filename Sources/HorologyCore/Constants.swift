@@ -10,3 +10,7 @@ public enum DateTimeMode : String {
     case timeOnly
     case dateAndTime
 }
+
+public enum HorologyError : Error {
+    case invalidCalendarIdentifier(String)
+}
