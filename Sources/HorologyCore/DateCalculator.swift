@@ -17,6 +17,15 @@ public class DateCalculator {
     public var adjustments : DateFields = DateFields()
     public var calendar : Calendar = Calendar.autoupdatingCurrent
 
+    public init() { }
+
+    public convenience init(startDate : DateFields, adjustments : DateFields, calendar : Calendar = Calendar.autoupdatingCurrent) {
+        self.init()
+        self.startDate = startDate
+        self.adjustments = adjustments
+        self.calendar = calendar
+    }
+
     /**
      Perform a date calculation with the given mode.
      */
