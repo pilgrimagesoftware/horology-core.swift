@@ -6,16 +6,25 @@
 
 import Foundation
 
-
-/**
- Initialize an instance of this class with a calendar and the two dates to compare. Call `calculate(with:)` whenever
- a result is desired.
- */
+/// Initialize an instance of this class with a calendar and the two dates to compare. Call `calculate(with:)` whenever
+/// a result is desired.
 public class DateComparer {
 
-    public var firstDate : DateFields = DateFields()
-    public var secondDate : DateFields = DateFields()
-    public var calendar : Calendar = Calendar.autoupdatingCurrent
+    public var firstDate: DateFields = DateFields()
+    public var secondDate: DateFields = DateFields()
+    public var calendar: Calendar = Calendar.autoupdatingCurrent
+
+    public init() {}
+
+    public convenience init(
+        firstDate: DateFields, secondDate: DateFields,
+        calendar: Calendar = Calendar.autoupdatingCurrent
+    ) {
+        self.init()
+        self.firstDate = firstDate
+        self.secondDate = secondDate
+        self.calendar = calendar
+    }
 
     /**
      Perform a date comparison with the two dates provided, using the configured calendar. If the date values are
@@ -25,11 +34,13 @@ public class DateComparer {
      - returns: the comparison result in a DateComponents value object
      - throws: validation error if either date is incomplete or invalid
      */
-    public func calculate(with mode : DateTimeMode) throws -> DateComponents {
+    public func calculate(with mode: DateTimeMode) throws -> DateComponents {
         // validate the first date
-        try DateFieldsValidator(fields: self.firstDate).validate(using: mode, calendar: self.calendar)
+        try DateFieldsValidator(fields: self.firstDate).validate(
+            using: mode, calendar: self.calendar)
         // validate the second date
-        try DateFieldsValidator(fields: self.secondDate).validate(using: mode, calendar: self.calendar)
+        try DateFieldsValidator(fields: self.secondDate).validate(
+            using: mode, calendar: self.calendar)
 
         var firstComps = DateComponents.from(fields: self.firstDate)
         var secondComps = DateComponents.from(fields: self.secondDate)
@@ -54,19 +65,23 @@ public class DateComparer {
         default: break
         }
 
-        guard let first = self.calendar.date(from: firstComps) else { throw ComparisonError.conversionError(self.firstDate) }
-        guard let second = self.calendar.date(from: secondComps) else { throw ComparisonError.conversionError(self.secondDate) }
+        guard let first = self.calendar.date(from: firstComps) else {
+            throw ComparisonError.conversionError(self.firstDate)
+        }
+        guard let second = self.calendar.date(from: secondComps) else {
+            throw ComparisonError.conversionError(self.secondDate)
+        }
 
-        let components : Set<Calendar.Component>
+        let components: Set<Calendar.Component>
         switch mode {
         case .dateOnly:
-            components = [ .year, .month, .day ]
+            components = [.year, .month, .day]
 
         case .timeOnly:
-            components = [ .hour, .minute, .second ]
+            components = [.hour, .minute, .second]
 
         case .dateAndTime:
-            components = [ .year, .month, .day, .hour, .minute, .second ]
+            components = [.year, .month, .day, .hour, .minute, .second]
         }
 
         return calendar.dateComponents(components, from: first, to: second)
@@ -74,7 +89,6 @@ public class DateComparer {
 
 }
 
-
-public enum ComparisonError : Error {
+public enum ComparisonError: Error {
     case conversionError(DateFields)
 }
